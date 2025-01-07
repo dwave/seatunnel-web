@@ -54,10 +54,7 @@ const Dashboard = defineComponent({
   render() {
     return (
       <NLayout>
-        <router-view
-          key={this['$route'].fullPath}
-          class={!this.showSide && 'px-32 py-12'}
-        />
+        <router-view key={this['$route'].fullPath} class='px-4 py-4' />
         {/* <NLayoutHeader bordered>
           <Header />
         </NLayoutHeader>

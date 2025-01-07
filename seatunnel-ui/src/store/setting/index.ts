@@ -23,7 +23,7 @@ export const useSettingStore = defineStore({
 	state: (): SettingStore => ({
 		sequenceColumn: false,
 		dataUniqueValue: false,
-		fillet: 15,
+		fillet: 5,
 		requestTime: 6000,
 		locales: 'zh_CN'
 	}),
