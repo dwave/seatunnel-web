@@ -16,10 +16,10 @@
  */
 
 import axios, {
-  AxiosRequestConfig,
-  AxiosResponse,
-  AxiosError,
-  InternalAxiosRequestConfig
+	AxiosRequestConfig,
+	AxiosResponse,
+	AxiosError,
+	InternalAxiosRequestConfig
 } from 'axios'
 import utils from '@/utils'
 import router from '@/router'
@@ -31,56 +31,56 @@ const userStore = useUserStore()
 const settingStore = useSettingStore()
 
 const handleError = (res: AxiosResponse<any, any>) => {
-  if (import.meta.env.MODE === 'development') {
-    utils.log.capsule('SeaTunnel', 'UI')
-    utils.log.error(res)
-  }
-  window.$message.error(res.data.msg)
+	if (import.meta.env.MODE === 'development') {
+		utils.log.capsule('SeaTunnel', 'UI')
+		utils.log.error(res)
+	}
+	window.$message.error(res.data.msg)
 }
 
 const baseRequestConfig: AxiosRequestConfig = {
-  timeout: settingStore.getRequestTimeValue
-    ? settingStore.getRequestTimeValue
-    : 6000,
-  baseURL: '/seatunnel/api/v1'
+	timeout: settingStore.getRequestTimeValue
+		? settingStore.getRequestTimeValue
+		: 6000,
+	baseURL: '/seatunnel/api/v1'
 }
 
 const service = axios.create(baseRequestConfig)
 
 const err = (err: AxiosError): Promise<AxiosError> => {
-  const userStore = useUserStore()
-  if (err.response?.status === 401) {
-    userStore.setUserInfo({})
-    router.push({ path: '/login' })
-  }
-  return Promise.reject(err)
+	const userStore = useUserStore()
+	if (err.response?.status === 401) {
+		userStore.setUserInfo({})
+		// router.push({ path: '/login' })
+	}
+	return Promise.reject(err)
 }
 
 service.interceptors.request.use((config: InternalAxiosRequestConfig) => {
-  if (Object.keys(userStore.getUserInfo).length > 0) {
-    config.headers &&
-      (config.headers.token = (userStore.getUserInfo as UserDetail)
-        .token as string)
-  }
+	if (Object.keys(userStore.getUserInfo).length > 0) {
+		config.headers &&
+			(config.headers.token = (userStore.getUserInfo as UserDetail)
+				.token as string)
+	}
 
-  return config
+	return config
 }, err)
 
 service.interceptors.response.use((res: AxiosResponse) => {
-  if (res.data.code === undefined) {
-    return res.data
-  }
+	if (res.data.code === undefined) {
+		return res.data
+	}
 
-  if (res.data.success) return res.data.data
+	if (res.data.success) return res.data.data
 
-  switch (res.data.code) {
-    case 0:
-      return res.data.data
-    
-    default:
-      handleError(res)
-      throw new Error()
-  }
+	switch (res.data.code) {
+		case 0:
+			return res.data.data
+
+		default:
+			handleError(res)
+			throw new Error()
+	}
 }, err)
 
 export { service as axios }
