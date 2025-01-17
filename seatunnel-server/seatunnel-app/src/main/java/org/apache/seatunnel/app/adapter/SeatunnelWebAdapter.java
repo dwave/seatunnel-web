@@ -70,9 +70,9 @@ public class SeatunnelWebAdapter implements WebMvcConfigurer {
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authenticationInterceptor())
                 .order(1)
-                //                .addPathPatterns(LOGIN_INTERCEPTOR_PATH_PATTERN)
+                .addPathPatterns(LOGIN_INTERCEPTOR_PATH_PATTERN)
                 .excludePathPatterns(
-                        "/**/*",
+//                        "/**/*",
                         LOGIN_PATH_PATTERN,
                         REGISTER_PATH_PATTERN,
                         "/swagger-resources/**",
