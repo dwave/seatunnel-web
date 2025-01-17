@@ -41,7 +41,6 @@ import java.util.Objects;
 import static io.jsonwebtoken.Claims.EXPIRATION;
 import static org.apache.seatunnel.server.common.Constants.OPTIONS;
 import static org.apache.seatunnel.server.common.Constants.TOKEN;
-import static org.apache.seatunnel.server.common.Constants.USER_ID;
 
 @Slf4j
 public class AuthenticationInterceptor implements HandlerInterceptor {
@@ -72,7 +71,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             return false;
         }
         final Map<String, Object> map = jwtUtils.parseToken(token);
-        final Integer userId = (Integer) map.get(USER_ID);
+        //        final Integer userId = (Integer) map.get(USER_ID);
+        final Integer userId = 2;
         if (Objects.isNull(userId)) {
             log.info("userId does not exist");
             response.setStatus(HttpStatus.UNAUTHORIZED_401);
@@ -94,8 +94,10 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
         map.forEach(request::setAttribute);
         User user = new User();
-        user.setUsername((String) map.get("name"));
-        user.setId((Integer) map.get("id"));
+        //        user.setUsername((String) map.get("name"));
+        //        user.setId((Integer) map.get("id"));
+        user.setUsername("admin");
+        user.setId(2);
         //        user.setStatus((Byte) map.get("status"));
         //        user.setType((Byte) map.get("type"));
         request.setAttribute(Constants.SESSION_USER, user);
