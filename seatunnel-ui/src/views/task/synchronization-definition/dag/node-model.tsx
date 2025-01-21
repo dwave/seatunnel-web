@@ -59,7 +59,14 @@ const NodeModeModal = defineComponent({
   setup(props, { expose }) {
     const { t } = useI18n()
     const { state, onInit, onSwitchTable, onUpdatedCheckedRowKeys } =
-      useNodeModel(props.type, props.transformType, props.predecessorsNodeId, props.schemaError, props.currentNodeId, props.refForm)
+      useNodeModel(
+        props.type,
+        props.transformType,
+        props.predecessorsNodeId,
+        props.schemaError,
+        props.currentNodeId,
+        props.refForm
+      )
 
     expose({
       getOutputSchema: () => ({
@@ -80,10 +87,7 @@ const NodeModeModal = defineComponent({
 
     return () => (
       <NGrid xGap={6}>
-        <NGridItem
-          span={6}
-          class={styles['list-container']}
-        >
+        <NGridItem span={6} class={styles['list-container']}>
           <NSpace vertical>
             <h3>{t('project.synchronization_definition.table_name')}</h3>
             <dl v-show={state.tables.length}>
@@ -115,11 +119,12 @@ const NodeModeModal = defineComponent({
               rowKey={(row) => row.name}
               checkedRowKeys={state.selectedKeys}
               scrollX={state.inputTableWidth}
+              maxHeight='calc(100vh - 350px)'
             />
           </NSpace>
         </NGridItem>
-        {
-          props.type !== 'sink' && <NGridItem span={9}>
+        {props.type !== 'sink' && (
+          <NGridItem span={9}>
             <NSpace vertical>
               <h3>
                 {t('project.synchronization_definition.output_table_structure')}
@@ -133,7 +138,7 @@ const NodeModeModal = defineComponent({
               />
             </NSpace>
           </NGridItem>
-        }
+        )}
       </NGrid>
     )
   }

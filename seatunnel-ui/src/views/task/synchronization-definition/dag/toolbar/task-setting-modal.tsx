@@ -17,7 +17,17 @@
 
 import { defineComponent, PropType, watch, inject } from 'vue'
 import { useI18n } from 'vue-i18n'
-import { NForm, NFormItem, NInput, NSelect, NSpin } from 'naive-ui'
+import {
+  NForm,
+  NFormItem,
+  NInput,
+  NSelect,
+  NSpin,
+  NDrawer,
+  NDrawerContent,
+  NSpace,
+  NButton
+} from 'naive-ui'
 import { useTaskSettingModal } from './use-task-setting-modal'
 import { DynamicFormItem } from '@/components/dynamic-form/dynamic-form-item'
 import Modal from '@/components/modal'
@@ -54,58 +64,79 @@ const TaskSettingModal = defineComponent({
     )
 
     return () => (
-      <Modal
-        title={t('project.synchronization_definition.setting')}
-        show={props.show}
-        onCancel={onCancelModel}
-        onConfirm={onConfirmModel}
-        confirmLoading={state.saving}
-      >
-        <NSpin show={state.loading}>
-          <NForm model={state.model} rules={state.rules} ref={settingFormRef}>
-            <NFormItem
-              label={t('project.synchronization_definition.task_name')}
-              path='taskName'
-            >
-              <NInput
-                v-model={[state.model.taskName, 'value']}
-                placeholder={t(
-                  'project.synchronization_definition.task_name_placeholder'
-                )}
-                clearable
-              />
-            </NFormItem>
-            <NFormItem
-              label={t('project.synchronization_definition.description')}
-              path='description'
-            >
-              <NInput
-                v-model={[state.model.description, 'value']}
-                placeholder={t(
-                  'project.synchronization_definition.description_placeholder'
-                )}
-                clearable
-              />
-            </NFormItem>
-            <NFormItem
-              label={t('project.synchronization_definition.engine')}
-              path='engine'
-            >
-              <NSelect
-                v-model={[state.model.engine, 'value']}
-                options={[{ value: 'SeaTunnel', label: 'SeaTunnel' }]}
-              />
-            </NFormItem>
-            {state.formStructure.length > 0 && (
-              <DynamicFormItem
-                model={state.model}
-                formStructure={state.formStructure}
-                name={state.formName}
-              />
-            )}
-          </NForm>
-        </NSpin>
-      </Modal>
+      <NDrawer show={props.show} width={500} zIndex={1000}>
+        <NDrawerContent title='设置'>
+          {{
+            default: () => (
+              // <Modal
+              //   title={t('project.synchronization_definition.setting')}
+              //   show={props.show}
+              //   onCancel={onCancelModel}
+              //   onConfirm={onConfirmModel}
+              //   confirmLoading={state.saving}
+              // >
+              <NSpin show={state.loading}>
+                <NForm
+                  model={state.model}
+                  rules={state.rules}
+                  ref={settingFormRef}
+                >
+                  <NFormItem
+                    label={t('project.synchronization_definition.task_name')}
+                    path='taskName'
+                  >
+                    <NInput
+                      v-model={[state.model.taskName, 'value']}
+                      placeholder={t(
+                        'project.synchronization_definition.task_name_placeholder'
+                      )}
+                      clearable
+                    />
+                  </NFormItem>
+                  <NFormItem
+                    label={t('project.synchronization_definition.description')}
+                    path='description'
+                  >
+                    <NInput
+                      v-model={[state.model.description, 'value']}
+                      placeholder={t(
+                        'project.synchronization_definition.description_placeholder'
+                      )}
+                      clearable
+                    />
+                  </NFormItem>
+                  <NFormItem
+                    label={t('project.synchronization_definition.engine')}
+                    path='engine'
+                  >
+                    <NSelect
+                      v-model={[state.model.engine, 'value']}
+                      options={[{ value: 'SeaTunnel', label: 'SeaTunnel' }]}
+                    />
+                  </NFormItem>
+                  {state.formStructure.length > 0 && (
+                    <DynamicFormItem
+                      model={state.model}
+                      formStructure={state.formStructure}
+                      name={state.formName}
+                    />
+                  )}
+                </NForm>
+              </NSpin>
+            ),
+            footer: () => (
+              <NSpace>
+                <NButton onClick={onCancelModel}>
+                  {t('project.synchronization_definition.cancel')}
+                </NButton>
+                <NButton onClick={onConfirmModel} type='primary'>
+                  {t('project.synchronization_definition.confirm')}
+                </NButton>
+              </NSpace>
+            )
+          }}
+        </NDrawerContent>
+      </NDrawer>
     )
   }
 })

@@ -62,6 +62,11 @@ service.interceptors.request.use((config: InternalAxiosRequestConfig) => {
 			(config.headers.token = (userStore.getUserInfo as UserDetail)
 				.token as string)
 	}
+	// 添加公共参数
+	config.params = {
+		...config.params,
+		userId: '2' // 配置默认的公共userId
+	};
 
 	return config
 }, err)
