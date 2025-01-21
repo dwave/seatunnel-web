@@ -24,46 +24,46 @@ import type { FormRules } from 'naive-ui'
 import type { Router } from 'vue-router'
 
 export function useForm() {
-  const router: Router = useRouter()
-  const { t } = useI18n()
-  const userStore = useUserStore()
+	const router: Router = useRouter()
+	const { t } = useI18n()
+	const userStore = useUserStore()
 
-  const state = reactive({
-    loginFormRef: ref(),
-    loginForm: {
-      username: '',
-      password: ''
-    },
-    rules: {
-      username: {
-        trigger: ['input', 'blur'],
-        validator() {
-          if (state.loginForm.username === '') {
-            return new Error(t('login.username_tips'))
-          }
-        }
-      },
-      password: {
-        trigger: ['input', 'blur'],
-        validator() {
-          if (state.loginForm.password === '') {
-            return new Error(t('login.password_tips'))
-          }
-        }
-      }
-    } as FormRules
-  })
+	const state = reactive({
+		loginFormRef: ref(),
+		loginForm: {
+			username: '',
+			password: ''
+		},
+		rules: {
+			username: {
+				trigger: ['input', 'blur'],
+				validator() {
+					if (state.loginForm.username === '') {
+						return new Error(t('login.username_tips'))
+					}
+				}
+			},
+			password: {
+				trigger: ['input', 'blur'],
+				validator() {
+					if (state.loginForm.password === '') {
+						return new Error(t('login.password_tips'))
+					}
+				}
+			}
+		} as FormRules
+	})
 
-  const handleLogin = () => {
-    userLogin({ ...state.loginForm }).then((res: any) => {
-      userStore.setUserInfo(res)
-      console.log('login-jumps')
-      router.push({ path: '/tasks' })
-    })
-  }
+	const handleLogin = () => {
+		userLogin({ ...state.loginForm }).then((res: any) => {
+			// userStore.setUserInfo(res)
+			// console.log('login-jumps')
+			router.push({ path: '/tasks' })
+		})
+	}
 
-  return {
-    state,
-    handleLogin
-  }
+	return {
+		state,
+		handleLogin
+	}
 }

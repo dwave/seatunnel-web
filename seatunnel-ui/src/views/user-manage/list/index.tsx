@@ -94,6 +94,7 @@ const UserManageList = defineComponent({
               loading={this.loading}
               columns={this.columns}
               data={this.tableData}
+              maxHeight='calc(100vh - 350px)'
             />
             <NSpace justify='center'>
               <NPagination

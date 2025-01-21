@@ -263,30 +263,8 @@ export function useNodeModel(
           } else if(transformType === 'Sql'){
             let table = await getSqlTransformOutputData()
             state.outputTableData = table
-          } else if(transformType === 'JsonPath'){
-            // extract the dest_field in columns
-            const fixedInput = refForm.value.getValues().columns.replace(/=/g, ':');
-            const destFieldMatches = fixedInput.match(/"dest_field"\s*:\s*"([^"]*)"/g);
-            const destFields = destFieldMatches.map(match => match.match(/"([^"]+)"$/)[1]);
-
-            state.outputTableData = state.inputTableData.map(item => ({ ...item }));
-            destFields.map(item => {
-              state.outputTableData.push(
-                {
-                  "format":"",
-                  "type": "TEXT",
-                  "name": item,
-                  "comment": "",
-                  "primaryKey": false,
-                  "defaultValue": '',
-                  "nullable": false,
-                  "unSupport": false,
-                  "outputDataType": "TEXT"
-              }
-              )
-            });
-          }
-          else {
+           
+          } else {
             state.outputTableData = t.fields
           }
         }

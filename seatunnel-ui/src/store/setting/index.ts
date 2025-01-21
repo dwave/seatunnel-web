@@ -19,47 +19,47 @@ import { defineStore } from 'pinia'
 import type { SettingStore, Locales } from './types'
 
 export const useSettingStore = defineStore({
-  id: 'setting',
-  state: (): SettingStore => ({
-    sequenceColumn: false,
-    dataUniqueValue: false,
-    fillet: 15,
-    requestTime: 6000,
-    locales: 'en_US'
-  }),
-  persist: true,
-  getters: {
-    getSequenceColumn(): boolean {
-      return this.sequenceColumn
-    },
-    getDataUniqueValue(): boolean {
-      return this.dataUniqueValue
-    },
-    getFilletValue(): number {
-      return this.fillet
-    },
-    getRequestTimeValue(): number {
-      return this.requestTime
-    },
-    getLocales(): Locales {
-      return this.locales
-    }
-  },
-  actions: {
-    setSequenceColumn(status: boolean): void {
-      this.sequenceColumn = status
-    },
-    setDataUniqueValue(status: boolean): void {
-      this.dataUniqueValue = status
-    },
-    setFilletValue(status: number): void {
-      this.fillet = status
-    },
-    setRequestTimeValue(status: number): void {
-      this.requestTime = status
-    },
-    setLocales(lang: Locales): void {
-      this.locales = lang
-    }
-  }
+	id: 'setting',
+	state: (): SettingStore => ({
+		sequenceColumn: false,
+		dataUniqueValue: false,
+		fillet: 5,
+		requestTime: 6000,
+		locales: 'zh_CN'
+	}),
+	persist: true,
+	getters: {
+		getSequenceColumn(): boolean {
+			return this.sequenceColumn
+		},
+		getDataUniqueValue(): boolean {
+			return this.dataUniqueValue
+		},
+		getFilletValue(): number {
+			return this.fillet
+		},
+		getRequestTimeValue(): number {
+			return this.requestTime
+		},
+		getLocales(): Locales {
+			return this.locales
+		}
+	},
+	actions: {
+		setSequenceColumn(status: boolean): void {
+			this.sequenceColumn = status
+		},
+		setDataUniqueValue(status: boolean): void {
+			this.dataUniqueValue = status
+		},
+		setFilletValue(status: number): void {
+			this.fillet = status
+		},
+		setRequestTimeValue(status: number): void {
+			this.requestTime = status
+		},
+		setLocales(lang: Locales): void {
+			this.locales = lang
+		}
+	}
 })

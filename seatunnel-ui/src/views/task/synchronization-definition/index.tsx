@@ -78,10 +78,10 @@ const SynchronizationDefinition = defineComponent({
         query: !_.isEmpty(query)
           ? {
               ...query,
-              ...route.query,
+              ...route.query
             }
           : {
-              ...route.query,
+              ...route.query
             }
       })
       requestData()
@@ -119,7 +119,7 @@ const SynchronizationDefinition = defineComponent({
       onConfirmModal,
       handleModalChange,
       onSearch,
-      handleKeyup,
+      handleKeyup
     }
   },
   render() {
@@ -127,10 +127,7 @@ const SynchronizationDefinition = defineComponent({
       <NSpace vertical>
         <NCard>
           <NSpace justify='space-between' itemStyle={{ flexGrow: 1 }}>
-            <NButton
-              type='info'
-              onClick={this.handleModalChange}
-            >
+            <NButton type='info' onClick={this.handleModalChange}>
               {this.t(
                 'project.synchronization_definition.create_synchronization_task'
               )}
@@ -159,6 +156,7 @@ const SynchronizationDefinition = defineComponent({
               loading={this.loadingRef}
               columns={this.columns}
               data={this.tableData}
+              maxHeight='calc(100vh - 350px)'
             />
             <NSpace justify='center'>
               <NPagination
