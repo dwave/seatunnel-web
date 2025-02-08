@@ -38,6 +38,10 @@ public interface IJobInstanceService {
             String envStr,
             JobExecParam executeParam);
 
+    String generateJobConfigByJobId(
+            @NonNull Integer userId, @NonNull Long jobDefineId, JobExecParam executeParam);
+
+
     JobExecutorRes getExecuteResource(@NonNull Long jobEngineId);
 
     void complete(

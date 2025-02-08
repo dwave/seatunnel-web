@@ -80,6 +80,23 @@ public class JobExecutorController {
         }
     }
 
+    @GetMapping("/jobConfig")
+    @ApiOperation(value = "get the jobConfig by job id", httpMethod = "GET")
+    public Result<String> jobConfig(
+            @ApiParam(value = "userId", required = true) @RequestAttribute("userId") Integer userId,
+            @ApiParam(value = "Job define id", required = true) @RequestParam("jobDefineId") Long jobDefineId)
+            throws IOException {
+        try {
+            String executeResource =
+                    jobInstanceService.generateJobConfigByJobId(userId, jobDefineId, null);
+            return Result.success(executeResource);
+        } catch (Exception e) {
+            log.error("Get the jobConfig by job id error", e);
+            throw new SeatunnelException(SeatunnelErrorEnum.ILLEGAL_STATE, e.getMessage());
+        }
+    }
+
+
     @GetMapping("/pause")
     public Result<Void> jobPause(
             @ApiParam(value = "userId", required = true) @RequestAttribute("userId") Integer userId,
