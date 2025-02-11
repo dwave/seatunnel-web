@@ -72,7 +72,7 @@ public class SeatunnelWebAdapter implements WebMvcConfigurer {
                 .order(1)
                 .addPathPatterns(LOGIN_INTERCEPTOR_PATH_PATTERN)
                 .excludePathPatterns(
-//                        "/**/*",
+                        //                        "/**/*",
                         LOGIN_PATH_PATTERN,
                         REGISTER_PATH_PATTERN,
                         "/swagger-resources/**",

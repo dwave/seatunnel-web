@@ -162,10 +162,7 @@ public class JobInstanceServiceImpl extends SeatunnelBaseServiceImpl
     public String generateJobConfigByJobId(
             @NonNull Integer userId, @NonNull Long jobDefineId, JobExecParam executeParam) {
         funcPermissionCheck(SeatunnelFuncPermissionKeyConstant.JOB_EXECUTOR_RESOURCE, userId);
-        log.info(
-                "generate job config By JobId, userId:{}, jobDefineId:{}",
-                userId,
-                jobDefineId);
+        log.info("generate job config By JobId, userId:{}, jobDefineId:{}", userId, jobDefineId);
         JobDefinition job = jobDefinitionDao.getJob(jobDefineId);
         JobVersion latestVersion = jobVersionDao.getLatestVersion(job.getId());
         String jobConfig = createJobConfig(latestVersion, executeParam);

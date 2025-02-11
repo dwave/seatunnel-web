@@ -12,7 +12,8 @@ class JobInstanceServiceImplTest {
     @Test
     void testCreateJobConfig() {
         String s = jobInstanceServiceImpl.generateJobConfigByJobId(2, 15697364989408L, null);
-//        String s = jobInstanceServiceImpl.generateJobConfigByJobId(2, 15565861321824L, null);
+        //        String s = jobInstanceServiceImpl.generateJobConfigByJobId(2, 15565861321824L,
+        // null);
 
         System.out.println(s);
     }

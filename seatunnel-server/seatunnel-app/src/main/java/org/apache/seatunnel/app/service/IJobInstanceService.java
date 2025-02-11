@@ -41,7 +41,6 @@ public interface IJobInstanceService {
     String generateJobConfigByJobId(
             @NonNull Integer userId, @NonNull Long jobDefineId, JobExecParam executeParam);
 
-
     JobExecutorRes getExecuteResource(@NonNull Long jobEngineId);
 
     void complete(
